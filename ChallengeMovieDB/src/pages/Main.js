@@ -29,6 +29,8 @@ const styles = StyleSheet.create({
     // flex: 1,
   },
   title: {
-    fontSize: 30,
+    fontSize: 32,
+    fontFamily: 'Inter',
+    color: '#FFFFFF',
   },
 });
