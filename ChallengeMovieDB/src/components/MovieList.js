@@ -8,15 +8,15 @@ import {fetchGenreMovies, fetchTrendingMovies} from '../actions';
 // import {fetchApiThunk} from '../actions';
 
 export const MovieList = props => {
-  const movies = useSelector(state => state.moviesReducer.movies);
-  const isLoading = useSelector(state => state.moviesReducer.isLoading);
-  const genres = useSelector(state => state.moviesReducer.genres);
-
   const dispatch = useDispatch();
-  useEffect(() => {
-    fetchTrendingMovies(dispatch);
-    fetchGenreMovies(dispatch);
-  }, [dispatch]);
+  const movies = useSelector(state => state.moviesReducer.movies);
+  const genres = useSelector(state => state.moviesReducer.genres);
+  console.log(genres[1].id);
+
+  // useEffect(() => {
+  //   // fetchTrendingMovies(dispatch);
+  //   // fetchGenreMovies(dispatch);
+  // }, [dispatch]);
 
   return (
     movies.length > 0 && (
