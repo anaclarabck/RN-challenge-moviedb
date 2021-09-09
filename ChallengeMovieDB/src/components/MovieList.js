@@ -1,39 +1,28 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, FlatList} from 'react-native';
 import {StyleSheet} from 'react-native';
+import {connect, useDispatch} from 'react-redux';
 import {MovieCard} from './MovieCard';
-// import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
+import {fetchGenreMovies, fetchTrendingMovies} from '../actions';
 // import {fetchApiThunk} from '../actions';
 
 export const MovieList = props => {
-  const [movieList, setMovieList] = useState([]);
-  // const movieListRedux = useSelector(state => state.movieList);
+  const movies = useSelector(state => state.moviesReducer.movies);
+  const isLoading = useSelector(state => state.moviesReducer.isLoading);
+  const genres = useSelector(state => state.moviesReducer.genres);
 
-  const fetchApiMovieDB = async () => {
-    const MOVIEDB_URL =
-      'https://api.themoviedb.org/3/trending/movie/day?api_key=5e4dbaf48b58268cbff212cb6e5c98a0';
-    try {
-      const response = await fetch(MOVIEDB_URL);
-      const {results} = await response.json();
-      return results;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    const fetchMovies = async () => {
-      const movies = await fetchApiMovieDB();
-      setMovieList(movies);
-    };
-    fetchMovies();
-  }, []);
+    fetchTrendingMovies(dispatch);
+    fetchGenreMovies(dispatch);
+  }, [dispatch]);
 
   return (
-    movieList.length > 0 && (
+    movies.length > 0 && (
       <View style={styles.container}>
         <FlatList
-          data={movieList}
+          data={movies}
           renderItem={item => <MovieCard element={item} />}
           // keyExtraction={item => item.id}
         />
@@ -49,13 +38,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
   },
 });
-
-// const mapStateToProps = state => ({
-//   movieListState: state.movieList,
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   ...bindActionCreators({fetchApiThunk}, dispatch),
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(CardList);

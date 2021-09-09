@@ -28,7 +28,7 @@ export const MovieCard = props => {
     </Card>
   );
 };
-// https://api.themoviedb.org/3/genre/movie/list?api_key=5e4dbaf48b58268cbff212cb6e5c98a0&language=en-US api de genero
+// api de genero
 const styles = StyleSheet.create({
   card: {
     // marginHorizontal: 'auto',
