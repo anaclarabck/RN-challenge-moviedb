@@ -6,7 +6,7 @@ import {StyleSheet} from 'react-native';
 export const Footer = () => {
   return (
     <View style={styles.container}>
-      <Text>Things</Text>
+      <Text>Footerrr</Text>
       {/* <Icon name="home-outline" /> */}
     </View>
   );

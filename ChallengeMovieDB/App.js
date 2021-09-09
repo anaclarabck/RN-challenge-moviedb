@@ -9,6 +9,10 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import {Provider} from 'react-redux';
+import store from './src/store';
+import {Footer} from './src/components/Footer';
+import {Main} from './src/pages/Main';
 // import {
 //   Colors,
 //   DebugInstructions,
@@ -16,15 +20,15 @@ import {
 //   LearnMoreLinks,
 //   ReloadInstructions,
 // } from 'react-native/Libraries/NewAppScreen';
-import {Footer} from './src/components/Footer';
-import {Main} from './src/pages/Main';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Main />
-      <Footer />
-    </View>
+    <Provider store={store}>
+      <View style={styles.container}>
+        <Main />
+        <Footer />
+      </View>
+    </Provider>
   );
 }
 
