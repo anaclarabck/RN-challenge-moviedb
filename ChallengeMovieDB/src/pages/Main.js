@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   container: {
     textAlign: 'center',
     margin: 'auto',
-    backgroundColor: 'blue',
+    backgroundColor: '#070818',
   },
   header: {
     // marginTop: 30,
