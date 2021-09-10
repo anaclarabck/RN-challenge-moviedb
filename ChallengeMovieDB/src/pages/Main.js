@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Footer} from '../components/Footer';
 import {MovieList} from '../components/MovieList';
 import {SearchBar} from '../components/SearchBar';
 
@@ -17,6 +18,7 @@ export const Main = () => {
       <View>
         <MovieList />
       </View>
+      <Footer />
     </View>
   );
 };
