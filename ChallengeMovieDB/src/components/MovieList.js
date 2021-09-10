@@ -1,16 +1,14 @@
 import React, {useEffect} from 'react';
-import {View, FlatList} from 'react-native';
-import {StyleSheet} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {View, FlatList, StyleSheet} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import {MovieCard} from './MovieCard';
-import {useSelector} from 'react-redux';
 import {
   fetchTrendingMovies,
   fetchGenreMovies,
   setFilteredMovies,
 } from '../actions';
 
-export const MovieList = props => {
+export const MovieList = () => {
   const dispatch = useDispatch();
   const movies = useSelector(state => state.moviesReducer.movies);
   const genres = useSelector(state => state.moviesReducer.genres);
@@ -24,8 +22,9 @@ export const MovieList = props => {
       await fetchGenreMovies(dispatch);
       setFilteredMovies(movies);
     };
+    console.log('MovieList');
     fetchMoviesAndGenres();
-  }, [dispatch, movies]);
+  }, [dispatch]);
 
   return (
     filteredMovies.length > 0 &&
@@ -34,7 +33,7 @@ export const MovieList = props => {
         <FlatList
           data={filteredMovies}
           renderItem={item => <MovieCard element={item} />}
-          // keyExtraction={item => item.id}
+          initialNumToRender={7}
         />
       </View>
     )

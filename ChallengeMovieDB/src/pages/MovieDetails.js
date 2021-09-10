@@ -8,26 +8,37 @@ import {
 } from 'react-native';
 import {useHistory} from 'react-router-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {useSelector} from 'react-redux';
 import {movieDetailsApi} from '../services/movieDetailsApi';
-import { StarRating } from '../components/StarRating';
+import {StarRating} from '../components/StarRating';
+import {MovieList} from '../components/MovieList';
+import {filterMovies} from '../actions';
 
-export const MovieDetails = ({location: {state}}) => {
+export const MovieDetails = ({location}) => {
   const history = useHistory();
-  const {id, genres, releaseYear} = state;
+  const {
+    state: {id, genres, releaseYear},
+  } = location;
   const [movie, setMovie] = useState('');
   const {poster_path, title, overview, runtime, vote_average} = movie;
   const movieDuration = `${Math.floor(runtime / 60)}h ${runtime % 60}m`;
   const subTitle = `${releaseYear} • ${genres} • ${movieDuration}`;
+  const filteredMovies = useSelector(
+    state => state.moviesReducer.filteredMovies,
+  );
+  const genresState = useSelector(state => state.moviesReducer.genres);
 
   useEffect(() => {
     const getMovieDetails = async () => {
       const response = await movieDetailsApi(id);
       setMovie(response);
+      filterMovies(id);
     };
+    console.log('MovieDetails');
     getMovieDetails();
   }, [id]);
 
-  return (
+  return movie ? (
     <View style={styles.container}>
       <ImageBackground
         style={styles.image}
@@ -43,33 +54,49 @@ export const MovieDetails = ({location: {state}}) => {
           <TouchableHighlight onPress={() => history.push('/')}>
             <Text style={styles.text}>Back</Text>
           </TouchableHighlight>
-          <Text style={styles.text}>{title}</Text>
-          <Text style={styles.text}>{subTitle}</Text>
-          <Text style={styles.text}>{overview}</Text>
-          <StarRating rating={vote_average} />
-          <Text style={styles.text}>Also trending</Text>
+          <View style={styles.details}>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.subtitle}>{subTitle}</Text>
+            <Text style={styles.overview}>{overview}</Text>
+            <StarRating rating={vote_average} />
+          </View>
+          <Text style={styles.trending}>Also trending</Text>
+          {filteredMovies.length > 0 && genresState.length > 0 && <MovieList />}
         </LinearGradient>
       </ImageBackground>
     </View>
+  ) : (
+    <Text>Carregando...</Text>
   );
 };
-
-// rgba(9, 11, 25, 0.8806)
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // textAlign: 'center',
-    // margin: 'auto',
   },
   image: {
     flex: 1,
-    // justifyContent: 'center',
     width: '100%',
     height: '100%',
   },
   text: {
     color: '#FFFFFF',
+  },
+  title: {
+    color: '#FFFFFF',
+    fontSize: 32,
+  },
+  subtitle: {
+    color: '#CDCED1',
+    fontSize: 12,
+  },
+  overview: {
+    color: '#FFFFFF',
+    fontSize: 14,
+  },
+  trending: {
+    color: '#FFFFFF',
+    fontSize: 24,
   },
   lineargradient: {
     flex: 1,
@@ -77,7 +104,10 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    // opacity: 0.9,
-    // backgroundColor: 'transparent',
+  },
+  details: {
+    marginTop: 208,
+    marginLeft: 72,
+    marginRight: 24,
   },
 });
