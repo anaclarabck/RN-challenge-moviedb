@@ -1,13 +1,23 @@
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {useHistory} from 'react-router-native';
 
 export const Footer = () => {
+  const history = useHistory();
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/homeWhite.png')} />
-      <Image source={require('../assets/trophyWhite.png')} />
-      <Image source={require('../assets/movieWhite.png')} />
-      <Image source={require('../assets/chartWhite.png')} />
+      <TouchableOpacity onPress={() => history.push('/')}>
+        <Image source={require('../assets/homeWhite.png')} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => history.push('/trending')}>
+        <Image source={require('../assets/trophyWhite.png')} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => history.push('/trailers')}>
+        <Image source={require('../assets/movieWhite.png')} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => history.push('/popular')}>
+        <Image source={require('../assets/chartWhite.png')} />
+      </TouchableOpacity>
     </View>
   );
 };

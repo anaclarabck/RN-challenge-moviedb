@@ -1,9 +1,12 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import store from './src/store';
-import {Main} from './src/pages/Main';
+import {TrendingMovies} from './src/pages/TrendingMovies';
+import {Home} from './src/pages/Home';
 import {MovieDetails} from './src/pages/MovieDetails';
 import {NativeRouter, Route} from 'react-router-native';
+import { TrailersMovies } from './src/pages/TrailersMovies';
+import { PopularMovies } from './src/pages/PopularMovies';
 // import type {Node} from 'react';
 // import {
 //   SafeAreaView,
@@ -26,7 +29,10 @@ export default function App() {
   return (
     <Provider store={store}>
       <NativeRouter>
-        <Route exact path="/" component={Main} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/trending" component={TrendingMovies} />
+        <Route exact path="/trailers" component={TrailersMovies} />
+        <Route exact path="/popular" component={PopularMovies} />
         <Route exact path="/details/:id" component={MovieDetails} />
       </NativeRouter>
     </Provider>

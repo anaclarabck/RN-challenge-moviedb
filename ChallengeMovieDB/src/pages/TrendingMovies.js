@@ -4,7 +4,7 @@ import {Footer} from '../components/Footer';
 import {MovieList} from '../components/MovieList';
 import {SearchBar} from '../components/SearchBar';
 
-export const Main = () => {
+export const TrendingMovies = () => {
   const [showingSearch, setShowingSearch] = useState(false);
   return (
     <View style={styles.container}>
