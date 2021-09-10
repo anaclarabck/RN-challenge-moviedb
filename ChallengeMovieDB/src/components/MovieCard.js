@@ -23,12 +23,14 @@ export const MovieCard = ({element}) => {
     .map(el => findGenre(el).name)
     .filter((_genre, index) => index < 2);
 
+  const releaseYear = release_date.slice(0, 4);
+
   return (
     <TouchableOpacity
       onPress={() =>
         history.push({
           pathname: `/details/${id}`,
-          state: {item},
+          state: {item, genreNames: genreNames.join(' / '), releaseYear},
         })
       }>
       <View style={styles.card}>
@@ -44,9 +46,7 @@ export const MovieCard = ({element}) => {
             <Paragraph style={styles.paragraph}>
               {genreNames.join(' / ')}
             </Paragraph>
-            <Paragraph style={styles.paragraph}>
-              {release_date.slice(0, 4)}
-            </Paragraph>
+            <Paragraph style={styles.paragraph}>{releaseYear}</Paragraph>
           </View>
           <StarRating rating={vote_average} />
         </View>
