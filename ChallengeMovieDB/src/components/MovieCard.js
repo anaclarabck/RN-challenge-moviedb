@@ -1,51 +1,57 @@
 import React, {useEffect} from 'react';
-import {View} from 'react-native';
-import {StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {Card, Paragraph, Title} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
+import {useHistory} from 'react-router-native';
 import {fetchGenreMovies} from '../actions';
 import {StarRating} from './StarRating';
 
-export const MovieCard = props => {
+export const MovieCard = ({element}) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const genres = useSelector(state => state.moviesReducer.genres);
-  const {element} = props;
-  const {
-    item: {title, id, poster_path, release_date, vote_average, genre_ids},
-  } = element;
+  const {item} = element;
+  const {title, id, poster_path, release_date, vote_average, genre_ids} = item;
 
   useEffect(() => {
     fetchGenreMovies(dispatch);
   }, [dispatch]);
 
-  const findGenre = genreId =>
-    genres.find(item => item.id === genreId && item.name);
+  const findGenre = genreId => genres.find(el => el.id === genreId && el.name);
 
   const genreNames = genre_ids
-    .map(item => findGenre(item).name)
+    .map(el => findGenre(el).name)
     .filter((_genre, index) => index < 2);
 
   return (
-    <View style={styles.card}>
-      <Card.Cover
-        style={styles.image}
-        key={id}
-        source={{uri: `https://image.tmdb.org/t/p/w500${poster_path}`}}
-        alt={`Cover of the movie ${title}`}
-      />
-      <View style={styles.content}>
-        <View>
-          <Title style={styles.title}>{title}</Title>
-          <Paragraph style={styles.paragraph}>
-            {genreNames.join(' / ')}
-          </Paragraph>
-          <Paragraph style={styles.paragraph}>
-            {release_date.slice(0, 4)}
-          </Paragraph>
+    <TouchableOpacity
+      onPress={() =>
+        history.push({
+          pathname: `/details/${id}`,
+          state: {item},
+        })
+      }>
+      <View style={styles.card}>
+        <Card.Cover
+          style={styles.image}
+          key={id}
+          source={{uri: `https://image.tmdb.org/t/p/w500${poster_path}`}}
+          alt={`Cover of the movie ${title}`}
+        />
+        <View style={styles.content}>
+          <View>
+            <Title style={styles.title}>{title}</Title>
+            <Paragraph style={styles.paragraph}>
+              {genreNames.join(' / ')}
+            </Paragraph>
+            <Paragraph style={styles.paragraph}>
+              {release_date.slice(0, 4)}
+            </Paragraph>
+          </View>
+          <StarRating rating={vote_average} />
         </View>
-        <StarRating rating={vote_average} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

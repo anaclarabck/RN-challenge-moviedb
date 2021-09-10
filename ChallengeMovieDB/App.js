@@ -1,18 +1,19 @@
 import React from 'react';
-// import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
 import {Provider} from 'react-redux';
 import store from './src/store';
-import {Footer} from './src/components/Footer';
 import {Main} from './src/pages/Main';
+import {MovieDetails} from './src/pages/MovieDetails';
+import {NativeRouter, Route} from 'react-router-native';
+// import type {Node} from 'react';
+// import {
+//   SafeAreaView,
+//   ScrollView,
+//   StatusBar,
+//   StyleSheet,
+//   Text,
+//   useColorScheme,
+//   View,
+// } from 'react-native';
 // import {
 //   Colors,
 //   DebugInstructions,
@@ -24,32 +25,32 @@ import {Main} from './src/pages/Main';
 export default function App() {
   return (
     <Provider store={store}>
-      <View style={styles.container}>
-        <Main />
-        <Footer />
-      </View>
+      <NativeRouter>
+        <Route exact path="/" component={Main} />
+        <Route exact path="/details/:id" component={MovieDetails} />
+      </NativeRouter>
     </Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    margin: 'auto',
-    backgroundColor: 'blue',
-  },
-  // sectionTitle: {
-  //   fontSize: 24,
-  //   fontWeight: '600',
-  // },
-  // sectionDescription: {
-  //   marginTop: 8,
-  //   fontSize: 18,
-  //   fontWeight: '400',
-  // },
-  // highlight: {
-  //   fontWeight: '700',
-  // },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     margin: 'auto',
+//     backgroundColor: 'blue',
+//   },
+//   sectionTitle: {
+//     fontSize: 24,
+//     fontWeight: '600',
+//   },
+//   sectionDescription: {
+//     marginTop: 8,
+//     fontSize: 18,
+//     fontWeight: '400',
+//   },
+//   highlight: {
+//     fontWeight: '700',
+//   },
+// });
 
 // const Section = ({children, title}): Node => {
 //   const isDarkMode = useColorScheme() === 'dark';
@@ -115,5 +116,3 @@ const styles = StyleSheet.create({
 //     </SafeAreaView>
 //   );
 // };
-
-
