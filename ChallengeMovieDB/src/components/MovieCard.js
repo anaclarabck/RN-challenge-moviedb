@@ -30,7 +30,7 @@ export const MovieCard = ({element}) => {
       onPress={() =>
         history.push({
           pathname: `/details/${id}`,
-          state: {item, genreNames: genreNames.join(' / '), releaseYear},
+          state: {id, genres: genreNames.join(' / '), releaseYear},
         })
       }>
       <View style={styles.card}>

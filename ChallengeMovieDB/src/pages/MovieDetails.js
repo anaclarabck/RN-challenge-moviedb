@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -8,12 +8,25 @@ import {
 } from 'react-native';
 import {useHistory} from 'react-router-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {movieDetailsApi} from '../services/movieDetailsApi';
+import { StarRating } from '../components/StarRating';
 
 export const MovieDetails = ({location: {state}}) => {
   const history = useHistory();
-  const {item, genreNames, releaseYear} = state;
-  const {poster_path, title, overview} = item;
-  const subTitle = `${releaseYear} • ${genreNames} •`;
+  const {id, genres, releaseYear} = state;
+  const [movie, setMovie] = useState('');
+  const {poster_path, title, overview, runtime, vote_average} = movie;
+  const movieDuration = `${Math.floor(runtime / 60)}h ${runtime % 60}m`;
+  const subTitle = `${releaseYear} • ${genres} • ${movieDuration}`;
+
+  useEffect(() => {
+    const getMovieDetails = async () => {
+      const response = await movieDetailsApi(id);
+      setMovie(response);
+    };
+    getMovieDetails();
+  }, [id]);
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -33,6 +46,8 @@ export const MovieDetails = ({location: {state}}) => {
           <Text style={styles.text}>{title}</Text>
           <Text style={styles.text}>{subTitle}</Text>
           <Text style={styles.text}>{overview}</Text>
+          <StarRating rating={vote_average} />
+          <Text style={styles.text}>Also trending</Text>
         </LinearGradient>
       </ImageBackground>
     </View>
