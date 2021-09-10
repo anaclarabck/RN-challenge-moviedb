@@ -5,6 +5,7 @@ import {
   TouchableHighlight,
   StyleSheet,
   ImageBackground,
+  ScrollView,
 } from 'react-native';
 import {useHistory} from 'react-router-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -51,17 +52,23 @@ export const MovieDetails = ({location}) => {
             '#090A17',
           ]}
           style={styles.lineargradient}>
-          <TouchableHighlight onPress={() => history.push('/')}>
-            <Text style={styles.text}>Back</Text>
-          </TouchableHighlight>
-          <View style={styles.details}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.subtitle}>{subTitle}</Text>
-            <Text style={styles.overview}>{overview}</Text>
-            <StarRating rating={vote_average} />
-          </View>
-          <Text style={styles.trending}>Also trending</Text>
-          {filteredMovies.length > 0 && genresState.length > 0 && <MovieList />}
+          <ScrollView>
+            <TouchableHighlight onPress={() => history.push('/')}>
+              <Text>Back</Text>
+            </TouchableHighlight>
+            <View style={styles.details}>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.subtitle}>{subTitle}</Text>
+              <Text style={styles.overview}>{overview}</Text>
+              <StarRating rating={vote_average} />
+            </View>
+            <View style={styles.movielist}>
+              <Text style={styles.trending}>Also trending</Text>
+              {filteredMovies.length > 0 && genresState.length > 0 && (
+                <MovieList />
+              )}
+            </View>
+          </ScrollView>
         </LinearGradient>
       </ImageBackground>
     </View>
@@ -79,24 +86,42 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  text: {
-    color: '#FFFFFF',
+  details: {
+    marginTop: 208,
+    marginLeft: 72,
+    marginRight: 24,
+    marginBottom: 10,
   },
   title: {
+    fontFamily: 'Inter',
+    fontWeight: 'bold',
     color: '#FFFFFF',
     fontSize: 32,
+    paddingBottom: 5,
   },
   subtitle: {
+    fontFamily: 'Inter',
     color: '#CDCED1',
     fontSize: 12,
+    paddingBottom: 16,
   },
   overview: {
+    fontFamily: 'Inter',
     color: '#FFFFFF',
     fontSize: 14,
+    paddingBottom: 16,
+  },
+  movielist: {
+    // alignItems: 'center',
+    alignContent: 'center',
+    marginHorizontal: 20,
   },
   trending: {
+    fontWeight: 'bold',
+    fontFamily: 'Inter',
     color: '#FFFFFF',
     fontSize: 24,
+    paddingBottom: 8,
   },
   lineargradient: {
     flex: 1,
@@ -104,10 +129,5 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-  },
-  details: {
-    marginTop: 208,
-    marginLeft: 72,
-    marginRight: 24,
   },
 });

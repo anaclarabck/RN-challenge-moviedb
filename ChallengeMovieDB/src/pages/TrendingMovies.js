@@ -15,7 +15,7 @@ export const TrendingMovies = () => {
         </TouchableOpacity>
       </View>
       {showingSearch && <SearchBar />}
-      <View>
+      <View style={styles.cardlist}>
         <MovieList />
       </View>
       <Footer />
@@ -28,8 +28,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 'auto',
     backgroundColor: '#070818',
+    height: '100%',
   },
   header: {
+    paddingTop: 31,
     flexDirection: 'row',
     marginHorizontal: 20,
     justifyContent: 'space-between',
@@ -39,7 +41,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+    fontWeight: 'bold',
     fontFamily: 'Inter',
     color: '#FFFFFF',
+  },
+  cardlist: {
+    paddingTop: 24,
   },
 });

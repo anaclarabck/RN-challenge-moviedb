@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // alignItems: 'center',
-    height: 100,
+    alignItems: 'center',
+    height: 56,
     position: 'absolute',
     left: 0,
     right: 0,
