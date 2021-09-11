@@ -9,7 +9,7 @@ export const StarRating = ({rating, top}) => {
     if (index > ratingRounded) {
       path = require('../assets/starUnfilled.png'); // if ratings is lower, set the path to unfilled stars
     }
-    stars.push(<Image style={styles.image} source={path} />);
+    stars.push(<Image style={styles.image} source={path} key={index} />);
   }
   return (
     <View style={top ? styles.containerBlue : styles.container}>

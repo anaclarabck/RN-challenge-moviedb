@@ -27,8 +27,7 @@ export const MovieCard = ({element}) => {
 
   useEffect(() => {
     fetchGenreMovies(dispatch);
-    console.log('MovieCard');
-    console.log(topMovie);
+    // console.log('MovieCard');
   }, [dispatch]);
 
   const findGenre = genreId => genres.find(el => el.id === genreId && el.name);

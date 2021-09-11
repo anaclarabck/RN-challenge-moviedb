@@ -18,7 +18,7 @@ export const SearchBar = () => {
       }
     };
     find();
-  }, [dispatch, movies, query]);
+  }, [query]);
 
   return (
     <View style={styles.container}>
