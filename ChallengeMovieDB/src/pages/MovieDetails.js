@@ -6,6 +6,7 @@ import {
   ImageBackground,
   // ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import {useHistory} from 'react-router-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -15,12 +16,25 @@ import {StarRating} from '../components/StarRating';
 import {MovieList} from '../components/MovieList';
 import {filterMovies} from '../actions';
 
+const topMovieTitle = () => {
+  return (
+    <View style={styles.topmovie}>
+      <Text style={styles.toptext}>Top movie of the week</Text>
+      <Image
+        style={styles.topicon}
+        source={require('../assets/goldMedal.png')}
+      />
+    </View>
+  );
+};
+
 export const MovieDetails = ({location}) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const {
     state: {id, genres, releaseYear},
   } = location;
+  const topMovie = useSelector(state => state.moviesReducer.topMovie);
   const [movie, setMovie] = useState('');
   const {poster_path, title, overview, runtime, vote_average} = movie;
   const movieDuration = `${Math.floor(runtime / 60)}h ${runtime % 60}m`;
@@ -44,7 +58,6 @@ export const MovieDetails = ({location}) => {
     <View style={styles.container}>
       <ImageBackground
         style={styles.image}
-        // resizeMode="cover"
         source={{uri: `https://image.tmdb.org/t/p/w500${poster_path}`}}>
         <LinearGradient
           colors={[
@@ -53,16 +66,16 @@ export const MovieDetails = ({location}) => {
             'rgba(9, 10, 23, 1)',
           ]}
           style={styles.lineargradient}>
-          {/* <TouchableOpacity onPress={() => history.push('/trending')}>
+          <TouchableOpacity
+            style={styles.touchable}
+            onPress={() => history.push('/trending')}>
             <Image
-              style={styles.image}
+              style={styles.icon}
               source={require('../assets/backWhite.png')}
             />
-          </TouchableOpacity> */}
-          {/* <ScrollView> */}
-          <TouchableOpacity onPress={() => history.push('/trending')}>
-            <Text style={styles.back}>Back</Text>
           </TouchableOpacity>
+          {id === topMovie && topMovieTitle()}
+          {/* <ScrollView> */}
           <View style={styles.details}>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.subtitle}>{subTitle}</Text>
@@ -92,6 +105,30 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
+  },
+  touchable: {
+    position: 'absolute',
+    top: 44.5,
+    left: 22.5,
+  },
+  icon: {
+    width: 24,
+    height: 24,
+  },
+  topmovie: {
+    position: 'absolute',
+    top: 184,
+    left: 24,
+  },
+  toptext: {
+    color: '#CDCED1',
+    fontFamily: 'Inter',
+    fontSize: 14,
+  },
+  topicon: {
+    marginTop: 8,
+    height: 38,
+    width: 32,
   },
   details: {
     marginTop: 208,
