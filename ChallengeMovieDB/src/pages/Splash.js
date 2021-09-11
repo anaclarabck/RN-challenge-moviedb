@@ -1,19 +1,23 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Image} from 'react-native';
 import {StyleSheet} from 'react-native';
 
-export const Main = () => {
+export const Splash = () => {
   return (
     <View style={styles.container}>
-      <Text>Logo</Text>
+      <Image style={styles.image} source={require('../assets/splash.png')} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    textAlign: 'center',
-    margin: 'auto',
-    backgroundColor: 'blue',
+    alignItems: 'center',
+    alignContent: 'center',
+    height: '100%',
+    backgroundColor: '#007CFF',
+  },
+  image: {
+    top: '40%',
   },
 });
