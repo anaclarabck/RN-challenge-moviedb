@@ -1,34 +1,17 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {MovieCard} from './MovieCard';
-import {
-  fetchTrendingMovies,
-  fetchGenreMovies,
-  setFilteredMovies,
-} from '../actions';
 
 const flatListItemSeparator = () => {
   return <View style={styles.separator} />;
 };
 
 export const MovieList = () => {
-  const dispatch = useDispatch();
-  const movies = useSelector(state => state.moviesReducer.movies);
   const genres = useSelector(state => state.moviesReducer.genres);
   const filteredMovies = useSelector(
     state => state.moviesReducer.filteredMovies,
   );
-
-  useEffect(() => {
-    const fetchMoviesAndGenres = async () => {
-      await fetchTrendingMovies(dispatch);
-      await fetchGenreMovies(dispatch);
-      setFilteredMovies(movies);
-    };
-    console.log('MovieList');
-    fetchMoviesAndGenres();
-  }, [dispatch]);
 
   return (
     filteredMovies.length > 0 &&
@@ -53,7 +36,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
   },
   separator: {
-    height: 20,
+    height: 16,
     width: '100%',
   },
 });

@@ -4,12 +4,12 @@ import {
   Text,
   StyleSheet,
   ImageBackground,
-  ScrollView,
+  // ScrollView,
   TouchableOpacity,
 } from 'react-native';
 import {useHistory} from 'react-router-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {movieDetailsApi} from '../services/movieDetailsApi';
 import {StarRating} from '../components/StarRating';
 import {MovieList} from '../components/MovieList';
@@ -17,6 +17,7 @@ import {filterMovies} from '../actions';
 
 export const MovieDetails = ({location}) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const {
     state: {id, genres, releaseYear},
   } = location;
@@ -33,7 +34,7 @@ export const MovieDetails = ({location}) => {
     const getMovieDetails = async () => {
       const response = await movieDetailsApi(id);
       setMovie(response);
-      filterMovies(id);
+      dispatch(filterMovies(id));
     };
     console.log('MovieDetails');
     getMovieDetails();
@@ -48,8 +49,8 @@ export const MovieDetails = ({location}) => {
         <LinearGradient
           colors={[
             'rgba(20, 23, 51, 0.0001)',
-            'rgba(9, 11, 25, 0.93)',
-            '#090A17',
+            'rgba(9, 11, 25, 0.92)',
+            'rgba(9, 10, 23, 1)',
           ]}
           style={styles.lineargradient}>
           {/* <TouchableOpacity onPress={() => history.push('/trending')}>
@@ -79,7 +80,7 @@ export const MovieDetails = ({location}) => {
       </ImageBackground>
     </View>
   ) : (
-    <Text>Carregando...</Text>
+    <Text>Loading...</Text>
   );
 };
 
@@ -118,7 +119,6 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   movielist: {
-    // alignItems: 'center',
     alignContent: 'center',
     marginHorizontal: 20,
   },

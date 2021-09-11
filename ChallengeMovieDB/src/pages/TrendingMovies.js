@@ -1,11 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  fetchGenreMovies,
-  fetchTrendingMovies,
-  setFilteredMovies,
-} from '../actions';
+import {fetchGenreMovies, fetchTrendingMovies} from '../actions';
 import {Footer} from '../components/Footer';
 import {MovieList} from '../components/MovieList';
 import {SearchBar} from '../components/SearchBar';
@@ -14,7 +10,6 @@ import {Splash} from './Splash';
 export const TrendingMovies = () => {
   const [showingSearch, setShowingSearch] = useState(false);
   const dispatch = useDispatch();
-  const movies = useSelector(state => state.moviesReducer.movies);
   const genres = useSelector(state => state.moviesReducer.genres);
   const filteredMovies = useSelector(
     state => state.moviesReducer.filteredMovies,
@@ -24,9 +19,8 @@ export const TrendingMovies = () => {
     const fetchMoviesAndGenres = async () => {
       await fetchTrendingMovies(dispatch);
       await fetchGenreMovies(dispatch);
-      setFilteredMovies(movies);
+      console.log('TrendingMovies');
     };
-    console.log('MovieList');
     fetchMoviesAndGenres();
   }, [dispatch]);
 

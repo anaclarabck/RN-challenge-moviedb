@@ -5,10 +5,12 @@ import {
   REQUEST_API_ERROR,
   SET_FILTERED_MOVIES,
   FILTER_MOVIES,
+  GET_TOP_MOVIE,
 } from '../actions';
 
 const INITIAL_STATE = {
   movies: [],
+  topMovie: '',
   filteredMovies: [],
   genres: [],
   isLoading: false,
@@ -32,6 +34,8 @@ function moviesReducer(state = INITIAL_STATE, action) {
         ...state,
         filteredMovies: state.movies.filter(el => el.id !== payload),
       };
+    case GET_TOP_MOVIE:
+      return {...state, topMovie: payload};
     default:
       return state;
   }
