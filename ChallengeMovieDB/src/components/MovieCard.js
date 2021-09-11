@@ -5,15 +5,30 @@ import {useHistory} from 'react-router-native';
 import {fetchGenreMovies} from '../actions';
 import {StarRating} from './StarRating';
 
+const goldMedal = () => {
+  return (
+    <View style={styles.goldMedal}>
+      <Image
+        style={styles.iconMedal}
+        source={require('../assets/goldMedal.png')}
+      />
+      <Text style={styles.textMedal}>Top movie this week</Text>
+    </View>
+  );
+};
+
 export const MovieCard = ({element}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const genres = useSelector(state => state.moviesReducer.genres);
+  const topMovie = useSelector(state => state.moviesReducer.topMovie);
   const {item} = element;
   const {title, id, poster_path, release_date, vote_average, genre_ids} = item;
 
   useEffect(() => {
     fetchGenreMovies(dispatch);
+    console.log('MovieCard');
+    console.log(topMovie);
   }, [dispatch]);
 
   const findGenre = genreId => genres.find(el => el.id === genreId && el.name);
@@ -27,27 +42,30 @@ export const MovieCard = ({element}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={styles.touchable}
         onPress={() =>
           history.push({
             pathname: `/details/${id}`,
             state: {id, genres: genreNames.join(' / '), releaseYear},
           })
         }>
-        <View style={styles.card}>
+        <View style={id === topMovie ? styles.topMovie : styles.card}>
           <Image
             style={styles.image}
             key={id}
             source={{uri: `https://image.tmdb.org/t/p/w500${poster_path}`}}
-            alt={`Cover of the movie ${title}`}
           />
           <View style={styles.content}>
             <View>
+              {id === topMovie && goldMedal()}
               <Text style={styles.title}>{title}</Text>
               <Text style={styles.paragraph}>{genreNames.join(' / ')}</Text>
               <Text style={styles.paragraph}>{releaseYear}</Text>
             </View>
-            <StarRating rating={vote_average} />
+            {id === topMovie ? (
+              <StarRating rating={vote_average} top={true} />
+            ) : (
+              <StarRating rating={vote_average} />
+            )}
           </View>
         </View>
       </TouchableOpacity>
@@ -57,38 +75,43 @@ export const MovieCard = ({element}) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#070818',
     flex: 1,
-    borderRadius: 10,
-  },
-  touchable: {
-    borderRadius: 10,
+    height: 168,
+    width: 312,
   },
   card: {
-    borderRadius: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignContent: 'center',
-    flexWrap: 'nowrap',
-    width: 312,
-    height: 168,
-    padding: 8,
+    borderRadius: 8,
     backgroundColor: '#1B1C2A',
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
   },
   image: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#070818',
+    borderBottomLeftRadius: 8,
+    borderTopLeftRadius: 8,
+    height: 168,
     width: 118,
-    height: 168,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
   },
-  content: {
-    backgroundColor: '#1B1C2A',
-    justifyContent: 'space-around',
-    height: 168,
-    margin: 10,
+  content: {justifyContent: 'space-between', margin: 16, width: 162},
+  topMovie: {
+    backgroundColor: '#007CFF',
+    borderRadius: 8,
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
   },
-  title: {width: 200, color: '#FFFFFF', fontSize: 16},
-  paragraph: {width: 200, color: '#CDCED1', fontSize: 12},
-  rating: {width: 200, backgroundColor: '#252634', fontSize: 12},
+  goldMedal: {
+    alignContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  iconMedal: {
+    height: 24,
+    marginRight: 5,
+    resizeMode: 'contain',
+    width: 24,
+  },
+  textMedal: {color: '#CCE5FF', fontSize: 14, fontWeight: '400'},
+  title: {color: '#FFFFFF', fontSize: 16, paddingBottom: 4},
+  paragraph: {color: '#CDCED1', fontSize: 12},
 });
