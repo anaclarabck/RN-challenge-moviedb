@@ -7,16 +7,28 @@ export const Footer = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => history.push('/')}>
-        <Image source={require('../assets/homeWhite.png')} />
+        <Image
+          style={styles.image}
+          source={require('../assets/homeWhite.png')}
+        />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => history.push('/trending')}>
-        <Image source={require('../assets/trophyWhite.png')} />
+        <Image
+          style={styles.image}
+          source={require('../assets/trophyWhite.png')}
+        />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => history.push('/trailers')}>
-        <Image source={require('../assets/movieWhite.png')} />
+        <Image
+          style={styles.image}
+          source={require('../assets/movieWhite.png')}
+        />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => history.push('/popular')}>
-        <Image source={require('../assets/chartWhite.png')} />
+        <Image
+          style={styles.image}
+          source={require('../assets/chartWhite.png')}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -35,5 +47,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#1B1C2A',
     paddingTop: 5,
     paddingHorizontal: 30,
+  },
+  image: {
+    height: 24,
+    width: 24,
   },
 });

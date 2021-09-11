@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
-  TouchableHighlight,
   StyleSheet,
   ImageBackground,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import {useHistory} from 'react-router-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -52,10 +52,16 @@ export const MovieDetails = ({location}) => {
             '#090A17',
           ]}
           style={styles.lineargradient}>
+          {/* <TouchableOpacity onPress={() => history.push('/trending')}>
+            <Image
+              style={styles.image}
+              source={require('../assets/backWhite.png')}
+            />
+          </TouchableOpacity> */}
           <ScrollView>
-            <TouchableHighlight onPress={() => history.push('/')}>
-              <Text>Back</Text>
-            </TouchableHighlight>
+            <TouchableOpacity onPress={() => history.push('/trending')}>
+              <Text style={styles.back}>Back</Text>
+            </TouchableOpacity>
             <View style={styles.details}>
               <Text style={styles.title}>{title}</Text>
               <Text style={styles.subtitle}>{subTitle}</Text>
@@ -129,5 +135,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
+  },
+  back: {
+    color: '#FFFFFF',
   },
 });
