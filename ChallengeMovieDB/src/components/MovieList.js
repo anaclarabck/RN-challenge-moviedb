@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
+    paddingBottom: 135,
   },
   separator: {
     height: 16,

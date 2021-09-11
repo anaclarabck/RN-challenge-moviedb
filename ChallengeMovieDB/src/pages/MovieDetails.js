@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   ImageBackground,
-  // ScrollView,
   TouchableOpacity,
   Image,
 } from 'react-native';
@@ -14,9 +13,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {movieDetailsApi} from '../services/movieDetailsApi';
 import {StarRating} from '../components/StarRating';
 import {MovieList} from '../components/MovieList';
+import {Loading} from '../components/Loading';
 import {filterMovies} from '../actions';
 
-const topMovieTitle = () => {
+const TopMovieTitle = () => {
   return (
     <View style={styles.topmovie}>
       <Text style={styles.toptext}>Top movie of the week</Text>
@@ -36,6 +36,8 @@ export const MovieDetails = ({location}) => {
   } = location;
   const topMovie = useSelector(state => state.moviesReducer.topMovie);
   const [movie, setMovie] = useState('');
+  const [loading, setLoading] = useState(true);
+  console.log(loading);
   const {poster_path, title, overview, runtime, vote_average} = movie;
   const movieDuration = `${Math.floor(runtime / 60)}h ${runtime % 60}m`;
   const subTitle = `${releaseYear} • ${genres} • ${movieDuration}`;
@@ -47,14 +49,17 @@ export const MovieDetails = ({location}) => {
   useEffect(() => {
     const getMovieDetails = async () => {
       const response = await movieDetailsApi(id);
-      setMovie(response);
-      dispatch(filterMovies(id));
+      await setMovie(response);
+      await dispatch(filterMovies(id));
+      setLoading(false);
     };
     console.log('MovieDetails');
     getMovieDetails();
   }, [id]);
 
-  return movie ? (
+  return loading ? (
+    <Loading />
+  ) : (
     <View style={styles.container}>
       <ImageBackground
         style={styles.image}
@@ -74,8 +79,7 @@ export const MovieDetails = ({location}) => {
               source={require('../assets/backWhite.png')}
             />
           </TouchableOpacity>
-          {id === topMovie && topMovieTitle()}
-          {/* <ScrollView> */}
+          {id === topMovie && <TopMovieTitle />}
           <View style={styles.details}>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.subtitle}>{subTitle}</Text>
@@ -88,12 +92,9 @@ export const MovieDetails = ({location}) => {
               <MovieList />
             )}
           </View>
-          {/* </ScrollView> */}
         </LinearGradient>
       </ImageBackground>
     </View>
-  ) : (
-    <Text>Loading...</Text>
   );
 };
 
