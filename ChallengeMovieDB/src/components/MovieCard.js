@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
-import {Card, Paragraph, Title} from 'react-native-paper';
+import {View, StyleSheet, TouchableOpacity, Image, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-native';
 import {fetchGenreMovies} from '../actions';
@@ -26,37 +25,46 @@ export const MovieCard = ({element}) => {
   const releaseYear = release_date.slice(0, 4);
 
   return (
-    <TouchableOpacity
-      onPress={() =>
-        history.push({
-          pathname: `/details/${id}`,
-          state: {id, genres: genreNames.join(' / '), releaseYear},
-        })
-      }>
-      <View style={styles.card}>
-        <Card.Cover
-          style={styles.image}
-          key={id}
-          source={{uri: `https://image.tmdb.org/t/p/w500${poster_path}`}}
-          alt={`Cover of the movie ${title}`}
-        />
-        <View style={styles.content}>
-          <View>
-            <Title style={styles.title}>{title}</Title>
-            <Paragraph style={styles.paragraph}>
-              {genreNames.join(' / ')}
-            </Paragraph>
-            <Paragraph style={styles.paragraph}>{releaseYear}</Paragraph>
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.touchable}
+        onPress={() =>
+          history.push({
+            pathname: `/details/${id}`,
+            state: {id, genres: genreNames.join(' / '), releaseYear},
+          })
+        }>
+        <View style={styles.card}>
+          <Image
+            style={styles.image}
+            key={id}
+            source={{uri: `https://image.tmdb.org/t/p/w500${poster_path}`}}
+            alt={`Cover of the movie ${title}`}
+          />
+          <View style={styles.content}>
+            <View>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.paragraph}>{genreNames.join(' / ')}</Text>
+              <Text style={styles.paragraph}>{releaseYear}</Text>
+            </View>
+            <StarRating rating={vote_average} />
           </View>
-          <StarRating rating={vote_average} />
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    borderRadius: 10,
+  },
+  touchable: {
+    borderRadius: 10,
+  },
   card: {
+    borderRadius: 10,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -64,11 +72,16 @@ const styles = StyleSheet.create({
     flexWrap: 'nowrap',
     width: 312,
     height: 168,
-    borderRadius: 20,
     padding: 8,
     backgroundColor: '#1B1C2A',
   },
-  image: {backgroundColor: '#FFFFFF', width: 118, height: 168},
+  image: {
+    backgroundColor: '#FFFFFF',
+    width: 118,
+    height: 168,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
   content: {
     backgroundColor: '#1B1C2A',
     justifyContent: 'space-around',

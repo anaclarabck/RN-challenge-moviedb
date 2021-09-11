@@ -58,23 +58,23 @@ export const MovieDetails = ({location}) => {
               source={require('../assets/backWhite.png')}
             />
           </TouchableOpacity> */}
-          <ScrollView>
-            <TouchableOpacity onPress={() => history.push('/trending')}>
-              <Text style={styles.back}>Back</Text>
-            </TouchableOpacity>
-            <View style={styles.details}>
-              <Text style={styles.title}>{title}</Text>
-              <Text style={styles.subtitle}>{subTitle}</Text>
-              <Text style={styles.overview}>{overview}</Text>
-              <StarRating rating={vote_average} />
-            </View>
-            <View style={styles.movielist}>
-              <Text style={styles.trending}>Also trending</Text>
-              {filteredMovies.length > 0 && genresState.length > 0 && (
-                <MovieList />
-              )}
-            </View>
-          </ScrollView>
+          {/* <ScrollView> */}
+          <TouchableOpacity onPress={() => history.push('/trending')}>
+            <Text style={styles.back}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.details}>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.subtitle}>{subTitle}</Text>
+            <Text style={styles.overview}>{overview}</Text>
+            <StarRating rating={vote_average} />
+          </View>
+          <View style={styles.movielist}>
+            <Text style={styles.trending}>Also trending</Text>
+            {filteredMovies.length > 0 && genresState.length > 0 && (
+              <MovieList />
+            )}
+          </View>
+          {/* </ScrollView> */}
         </LinearGradient>
       </ImageBackground>
     </View>

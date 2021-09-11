@@ -8,6 +8,10 @@ import {
   setFilteredMovies,
 } from '../actions';
 
+const flatListItemSeparator = () => {
+  return <View style={styles.separator} />;
+};
+
 export const MovieList = () => {
   const dispatch = useDispatch();
   const movies = useSelector(state => state.moviesReducer.movies);
@@ -33,6 +37,8 @@ export const MovieList = () => {
         <FlatList
           data={filteredMovies}
           renderItem={item => <MovieCard element={item} />}
+          ItemSeparatorComponent={flatListItemSeparator}
+          keyExtractor={(item, index) => index.toString()} // entender isso depois
           initialNumToRender={7}
         />
       </View>
@@ -45,6 +51,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
-    // backgroundColor: 'red',
+  },
+  separator: {
+    height: 20,
+    width: '100%',
   },
 });
