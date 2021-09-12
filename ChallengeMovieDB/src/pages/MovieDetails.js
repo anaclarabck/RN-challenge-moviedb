@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -53,8 +53,13 @@ export const MovieDetails = ({location}) => {
       setLoading(false);
     };
     console.log('MovieDetails');
-    setLoading(true);
     getMovieDetails();
+  }, [id]);
+
+  useLayoutEffect(() => {
+    return () => {
+      setLoading(true);
+    };
   }, [id]);
 
   return loading ? (
