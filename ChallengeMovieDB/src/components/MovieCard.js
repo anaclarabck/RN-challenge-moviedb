@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#070818',
     flex: 1,
     height: 168,
-    width: 312,
   },
   card: {
     borderRadius: 8,
@@ -86,13 +85,13 @@ const styles = StyleSheet.create({
     flexWrap: 'nowrap',
   },
   image: {
-    backgroundColor: '#070818',
+    backgroundColor: '#1B1C2A',
     borderBottomLeftRadius: 8,
     borderTopLeftRadius: 8,
     height: 168,
     width: 118,
   },
-  content: {justifyContent: 'space-between', margin: 16, width: 162},
+  content: {justifyContent: 'space-between', margin: 16, width: '56%'},
   topMovie: {
     backgroundColor: '#007CFF',
     borderRadius: 8,

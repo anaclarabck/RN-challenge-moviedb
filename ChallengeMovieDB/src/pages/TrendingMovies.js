@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
   },
   cardlist: {
     paddingTop: 24,
+    alignItems: 'center',
   },
   icon: {
     height: 24,

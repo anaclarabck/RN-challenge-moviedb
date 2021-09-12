@@ -91,12 +91,12 @@ export const MovieDetails = ({location}) => {
             <Text style={styles.overview}>{overview}</Text>
             <StarRating rating={vote_average} />
           </View>
-          <View style={styles.movielist}>
-            <Text style={styles.trending}>Also trending</Text>
-            {filteredMovies.length > 0 && genresState.length > 0 && (
+          <Text style={styles.trending}>Also trending</Text>
+          {filteredMovies.length > 0 && genresState.length > 0 && (
+            <View style={styles.movielist}>
               <MovieList />
-            )}
-          </View>
+            </View>
+          )}
         </LinearGradient>
       </ImageBackground>
     </View>
@@ -163,9 +163,10 @@ const styles = StyleSheet.create({
   },
   movielist: {
     alignContent: 'center',
-    marginHorizontal: 20,
+    alignItems: 'center',
   },
   trending: {
+    marginLeft: 24,
     fontWeight: 'bold',
     fontFamily: 'Inter',
     color: '#FFFFFF',
@@ -178,8 +179,5 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-  },
-  back: {
-    color: '#FFFFFF',
   },
 });

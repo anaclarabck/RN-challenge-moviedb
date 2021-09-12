@@ -31,10 +31,9 @@ export const MovieList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignContent: 'center',
     paddingBottom: 135,
+    width: '88%',
+    // backgroundColor: 'red',
   },
   separator: {
     height: 16,
