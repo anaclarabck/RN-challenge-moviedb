@@ -5,8 +5,8 @@ import {Footer} from '../components/Footer';
 export const TrailersMovies = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Coming Next...</Text>
-      <Footer />
+      <Text style={styles.title}>Coming up...</Text>
+      <Footer page="trailers" />
     </View>
   );
 };

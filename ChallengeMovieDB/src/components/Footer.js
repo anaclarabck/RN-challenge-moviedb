@@ -2,31 +2,31 @@ import React from 'react';
 import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {useHistory} from 'react-router-native';
 
-export const Footer = () => {
+export const Footer = ({page}) => {
   const history = useHistory();
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => history.push('/')}>
         <Image
-          style={styles.image}
+          style={page === 'home' ? styles.currentIcon : styles.icon}
           source={require('../assets/homeWhite.png')}
         />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => history.push('/trending')}>
         <Image
-          style={styles.image}
+          style={page === 'trending' ? styles.currentIcon : styles.icon}
           source={require('../assets/trophyWhite.png')}
         />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => history.push('/trailers')}>
         <Image
-          style={styles.image}
+          style={page === 'trailers' ? styles.currentIcon : styles.icon}
           source={require('../assets/movieWhite.png')}
         />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => history.push('/popular')}>
         <Image
-          style={styles.image}
+          style={page === 'popular' ? styles.currentIcon : styles.icon}
           source={require('../assets/chartWhite.png')}
         />
       </TouchableOpacity>
@@ -48,8 +48,15 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     paddingHorizontal: 30,
   },
-  image: {
+  icon: {
     height: 24,
+    resizeMode: 'contain',
+    width: 24,
+  },
+  currentIcon: {
+    height: 24,
+    resizeMode: 'contain',
+    tintColor: '#1F8CFF',
     width: 24,
   },
 });
