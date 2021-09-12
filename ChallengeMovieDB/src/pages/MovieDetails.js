@@ -29,22 +29,21 @@ const TopMovieTitle = () => {
 };
 
 export const MovieDetails = ({location}) => {
-  const history = useHistory();
-  const dispatch = useDispatch();
   const {
     state: {id, genres, releaseYear},
   } = location;
-  const topMovie = useSelector(state => state.moviesReducer.topMovie);
-  const [movie, setMovie] = useState('');
-  const [loading, setLoading] = useState(true);
-  console.log(loading);
-  const {poster_path, title, overview, runtime, vote_average} = movie;
-  const movieDuration = `${Math.floor(runtime / 60)}h ${runtime % 60}m`;
-  const subTitle = `${releaseYear} • ${genres} • ${movieDuration}`;
+  const history = useHistory();
+  const dispatch = useDispatch();
   const filteredMovies = useSelector(
     state => state.moviesReducer.filteredMovies,
   );
+  const topMovie = useSelector(state => state.moviesReducer.topMovie);
   const genresState = useSelector(state => state.moviesReducer.genres);
+  const [movie, setMovie] = useState('');
+  const [loading, setLoading] = useState(true);
+  const {poster_path, title, overview, runtime, vote_average} = movie;
+  const movieDuration = `${Math.floor(runtime / 60)}h ${runtime % 60}m`;
+  const subTitle = `${releaseYear} • ${genres} • ${movieDuration}`;
 
   useEffect(() => {
     const getMovieDetails = async () => {
@@ -54,6 +53,7 @@ export const MovieDetails = ({location}) => {
       setLoading(false);
     };
     console.log('MovieDetails');
+    setLoading(true);
     getMovieDetails();
   }, [id]);
 
