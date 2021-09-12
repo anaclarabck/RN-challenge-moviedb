@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Footer} from '../components/Footer';
+import {Loading} from '../components/Loading';
 
 export const TrailersMovies = () => {
-  return (
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+  return loading ? (
+    <Loading />
+  ) : (
     <View style={styles.container}>
       <Text style={styles.title}>Coming up...</Text>
       <Footer page="trailers" />
@@ -20,7 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#070818',
   },
   title: {
-    top: '40%',
+    top: '44%',
     fontSize: 32,
     fontFamily: 'Inter',
     color: '#FFFFFF',
