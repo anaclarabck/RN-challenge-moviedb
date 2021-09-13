@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, FlatList, StyleSheet} from 'react-native';
+import {View, FlatList, StyleSheet, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MovieCard} from './MovieCard';
 
@@ -10,8 +10,17 @@ const flatListItemSeparator = () => {
 export const MovieList = () => {
   const genres = useSelector(state => state.movies.genres);
   const filteredMovies = useSelector(state => state.movies.filteredMovies);
+  const topMovie = useSelector(state => state.movies.topMovie);
+  const moviesFound = useSelector(state => state.movies.moviesFound);
+
+  if (!moviesFound) {
+    return (
+      <Text style={styles.text}>Your search did not find any movie :(</Text>
+    );
+  }
   return (
     filteredMovies.length > 0 &&
+    topMovie &&
     genres.length > 0 && (
       <View style={styles.container}>
         <FlatList
@@ -34,5 +43,11 @@ const styles = StyleSheet.create({
   separator: {
     height: 16,
     width: '100%',
+  },
+  text: {
+    marginTop: 50,
+    color: '#FFFFFF',
+    fontFamily: 'Inter',
+    fontSize: 18,
   },
 });

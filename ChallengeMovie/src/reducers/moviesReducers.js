@@ -6,6 +6,7 @@ import {
   REQUEST_API_ERROR,
   SET_FILTERED_MOVIES,
   FILTER_MOVIES,
+  SET_MOVIES_FOUND,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -36,6 +37,8 @@ function movies(state = INITIAL_STATE, action) {
         ...state,
         filteredMovies: state.trendingMovies.filter(el => el.id !== payload),
       };
+    case SET_MOVIES_FOUND:
+      return {...state, moviesFound: payload};
     default:
       return state;
   }
