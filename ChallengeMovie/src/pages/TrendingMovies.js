@@ -1,30 +1,48 @@
 import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {fetchGenreMovies, fetchTrendingMovies} from '../actions';
 import {Loading} from '../components/Loading';
 
 export const TrendingMovies = () => {
   const [showingSearch, setShowingSearch] = useState(false);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const genres = useSelector(state => state.movies.genres);
+  const filteredMovies = useSelector(state => state.movies.filteredMovies);
 
   useEffect(() => {
-    setLoading(false);
+    const fetchMoviesAndGenres = async () => {
+      await fetchGenreMovies(dispatch);
+      await fetchTrendingMovies(dispatch);
+      setLoading(false);
+      console.log('TrendingMovies');
+      // console.log(filteredMovies);
+      // console.log(genres);
+      // console.log(isLoading);
+    };
+    fetchMoviesAndGenres();
   }, []);
 
-  return loading ? (
-    <Loading />
-  ) : (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Top Movies</Text>
-        <TouchableOpacity onPress={() => setShowingSearch(!showingSearch)}>
-          <Image
-            style={styles.icon}
-            source={require('../assets/searchWhite.png')}
-          />
-        </TouchableOpacity>
+  if (genres.length === 0 || filteredMovies.length === 0) {
+    return <View>Splash</View>;
+  } else {
+    return loading ? (
+      <Loading />
+    ) : (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.title}>Top Movies</Text>
+          <TouchableOpacity onPress={() => setShowingSearch(!showingSearch)}>
+            <Image
+              style={styles.icon}
+              source={require('../assets/searchWhite.png')}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
 };
 
 const styles = StyleSheet.create({
