@@ -20,10 +20,6 @@ export const TrendingMovies = () => {
       await fetchGenreMovies(dispatch);
       await fetchTrendingMovies(dispatch);
       setLoading(false);
-      console.log('TrendingMovies');
-      // console.log(filteredMovies);
-      // console.log(genres);
-      // console.log(isLoading);
     };
     fetchMoviesAndGenres();
   }, []);

@@ -18,7 +18,7 @@ export const MovieList = () => {
           data={filteredMovies}
           renderItem={item => <MovieCard element={item} />}
           ItemSeparatorComponent={flatListItemSeparator}
-          keyExtractor={(item, index) => index.toString()} // entender isso depois
+          keyExtractor={(item, index) => index.toString()}
           initialNumToRender={7}
         />
       </View>

@@ -50,7 +50,6 @@ export const MovieDetails = ({location}) => {
       await dispatch(filterMovies(id));
       setLoading(false);
     };
-    console.log('MovieDetails');
     getMovieDetails();
   }, [id]);
 
@@ -91,7 +90,6 @@ export const MovieDetails = ({location}) => {
           </View>
           <Text style={styles.trending}>Also trending</Text>
           {filteredMovies.length > 0 && genresState.length > 0 && (
-            // {filteredMovies.length > 0 && (
             <View style={styles.movielist}>
               <MovieList />
             </View>
