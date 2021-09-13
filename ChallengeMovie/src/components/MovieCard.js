@@ -1,8 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, StyleSheet, TouchableOpacity, Image, Text} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {useHistory} from 'react-router-native';
-import {fetchGenreMovies} from '../actions';
 import {StarRating} from '../components/StarRating';
 
 const goldMedal = () => {
@@ -18,26 +17,18 @@ const goldMedal = () => {
 };
 
 export const MovieCard = ({element}) => {
-  const dispatch = useDispatch();
   const history = useHistory();
   const genres = useSelector(state => state.movies.genres);
   const topMovie = useSelector(state => state.movies.topMovie);
   const {item} = element;
   const {title, id, poster_path, release_date, genre_ids, vote_average} = item;
-
-  useEffect(() => {
-    fetchGenreMovies(dispatch);
-  }, [dispatch]);
-
+  const releaseYear = release_date ? release_date.slice(0, 4) : '';
   const findGenre = genreId => genres.find(el => el.id === genreId && el.name);
-
   const genreNames = genre_ids
     .map(el => findGenre(el).name)
     .filter((_genre, index) => index < 2);
 
-  const releaseYear = release_date.slice(0, 4);
-
-  return (
+  return item && genres.length > 0 && topMovie ? (
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() =>
@@ -68,6 +59,8 @@ export const MovieCard = ({element}) => {
         </View>
       </TouchableOpacity>
     </View>
+  ) : (
+    <Text>Error</Text>
   );
 };
 
