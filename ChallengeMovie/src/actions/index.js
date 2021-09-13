@@ -55,3 +55,16 @@ export const fetchGenreMovies = async dispatch => {
     dispatch(requestApiError(error));
   }
 };
+
+// for searching movies
+export const searchMovies = async (query, dispatch) => {
+  const URL = `https://api.themoviedb.org/3/search/movie?api_key=${moviedbKey}&language=en-US&query=${query}&page=1&include_adult=false`;
+  dispatch(requestApi());
+  try {
+    const response = await fetch(URL);
+    const {results} = await response.json();
+    dispatch(setFilteredMovies(results));
+  } catch (error) {
+    dispatch(requestApiError(error));
+  }
+};

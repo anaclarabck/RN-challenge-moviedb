@@ -4,6 +4,7 @@ import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {fetchGenreMovies, fetchTrendingMovies} from '../actions';
 import {Loading} from '../components/Loading';
 import {MovieList} from '../components/MovieList';
+import {SearchBar} from '../components/SearchBar';
 
 export const TrendingMovies = () => {
   const [showingSearch, setShowingSearch] = useState(false);
@@ -41,6 +42,7 @@ export const TrendingMovies = () => {
             />
           </TouchableOpacity>
         </View>
+        {showingSearch && <SearchBar />}
         <View style={styles.cardlist}>
           <MovieList />
         </View>

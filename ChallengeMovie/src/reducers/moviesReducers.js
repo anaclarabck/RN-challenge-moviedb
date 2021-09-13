@@ -22,7 +22,7 @@ function movies(state = INITIAL_STATE, action) {
     case REQUEST_API:
       return {...state, isLoading: true};
     case REQUEST_API_SUCCESS:
-      return {...state, movies: payload, isLoading: false};
+      return {...state, trendingMovies: payload, isLoading: false};
     case REQUEST_API_GENRE_SUCCESS:
       return {...state, genres: payload, isLoading: false};
     case REQUEST_API_ERROR:
@@ -34,7 +34,7 @@ function movies(state = INITIAL_STATE, action) {
     case FILTER_MOVIES:
       return {
         ...state,
-        filteredMovies: state.movies.filter(el => el.id !== payload),
+        filteredMovies: state.trendingMovies.filter(el => el.id !== payload),
       };
     default:
       return state;
