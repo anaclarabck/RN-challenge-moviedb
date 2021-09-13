@@ -69,12 +69,14 @@ export const MovieCard = ({element}) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#070818',
-    flex: 1,
     height: 168,
+    width: '88%',
+    marginRight: '6%',
+    marginLeft: '6%',
   },
   card: {
-    borderRadius: 8,
     backgroundColor: '#1B1C2A',
+    borderRadius: 8,
     flexDirection: 'row',
     flexWrap: 'nowrap',
   },

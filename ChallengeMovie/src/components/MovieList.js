@@ -38,7 +38,6 @@ export const MovieList = () => {
 const styles = StyleSheet.create({
   container: {
     paddingBottom: 135,
-    width: '88%',
   },
   separator: {
     height: 16,

@@ -66,6 +66,7 @@ export const searchMovies = async (query, dispatch) => {
   try {
     const response = await fetch(URL);
     const {results} = await response.json();
+    //  this condition is necessary if the fetch returns an empty array, so we can treat it
     if (results.length > 0) {
       dispatch(setFilteredMovies(results));
       dispatch(setMoviesFound(true));
