@@ -3,6 +3,7 @@ import {View, StyleSheet, TouchableOpacity, Image, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-native';
 import {fetchGenreMovies} from '../actions';
+import {StarRating} from '../components/StarRating';
 
 const goldMedal = () => {
   return (
@@ -22,7 +23,7 @@ export const MovieCard = ({element}) => {
   const genres = useSelector(state => state.movies.genres);
   const topMovie = useSelector(state => state.movies.topMovie);
   const {item} = element;
-  const {title, id, poster_path, release_date, genre_ids} = item;
+  const {title, id, poster_path, release_date, genre_ids, vote_average} = item;
 
   useEffect(() => {
     fetchGenreMovies(dispatch);
@@ -59,6 +60,11 @@ export const MovieCard = ({element}) => {
               <Text style={styles.paragraph}>{genreNames.join(' / ')}</Text>
               <Text style={styles.paragraph}>{releaseYear}</Text>
             </View>
+            {id === topMovie ? (
+              <StarRating rating={vote_average} isBlue={true} />
+            ) : (
+              <StarRating rating={vote_average} />
+            )}
           </View>
         </View>
       </TouchableOpacity>
