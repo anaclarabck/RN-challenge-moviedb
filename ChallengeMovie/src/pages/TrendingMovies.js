@@ -5,6 +5,7 @@ import {fetchGenreMovies, fetchTrendingMovies} from '../actions';
 import {Loading} from '../components/Loading';
 import {MovieList} from '../components/MovieList';
 import {SearchBar} from '../components/SearchBar';
+import {Footer} from '../components/Footer';
 
 export const TrendingMovies = () => {
   const [showingSearch, setShowingSearch] = useState(false);
@@ -46,6 +47,7 @@ export const TrendingMovies = () => {
         <View style={styles.cardlist}>
           <MovieList />
         </View>
+        <Footer page="trending" />
       </View>
     );
   }
