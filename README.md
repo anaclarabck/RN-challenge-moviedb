@@ -1,5 +1,22 @@
 # Jungle Devs - React Native Challenge The Movie DB
 
+## Instructions to run
+
+1. Clone the repository: `git clone git@github.com:anaclarabck/RN-challenge-moviedb.git`.
+
+2. Enter the repository folder you just cloned: `cd RN-challenge-moviedb`
+
+3. Change to the branch `git checkout developing-anaclarabck-2`
+
+4. Enter the folder ChallengeMovie `cd ChallengeMovie`
+
+5. Install the dependencies: `npm install`
+
+6. Start the Metro: `npm react-native start`
+
+7. Open a new terminal inside the ChallengeMovie folder and start the aplication: `npm react-native run-android`
+
+
 ## Description
 
 **Challenge goal**: The purpose of this challenge is to give a general idea of how to create a simple app using a variety of well accepted practices and technologies in the market. You'll be implementing a simplified version of a movie preview app using The Movie DB API. The concepts that you're gonna apply are:
@@ -32,9 +49,3 @@
 - Implement error handling and reload options
 - Manage the loading states accordingly
 - Paginate the movies list
-
-## Instructions to run
-Fork the repo, in the forked repo, create a new branch to work on. Create a new project using React Native CLI and do your work on that branch of the forked repo. When done, open a pull request from your branch to the master branch of the forked repo so that the end result can be reviewed.
-
-## Evaluation
-Our evaluation will be conducted over the state of the forked repository in which the challenge is done.
