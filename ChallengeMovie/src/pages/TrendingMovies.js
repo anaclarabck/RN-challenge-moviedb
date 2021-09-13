@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {fetchGenreMovies, fetchTrendingMovies} from '../actions';
 import {Loading} from '../components/Loading';
+import {MovieList} from '../components/MovieList';
 
 export const TrendingMovies = () => {
   const [showingSearch, setShowingSearch] = useState(false);
@@ -25,7 +26,7 @@ export const TrendingMovies = () => {
   }, []);
 
   if (genres.length === 0 || filteredMovies.length === 0) {
-    return <View>Splash</View>;
+    return <Text>Splash</Text>;
   } else {
     return loading ? (
       <Loading />
@@ -39,6 +40,9 @@ export const TrendingMovies = () => {
               source={require('../assets/searchWhite.png')}
             />
           </TouchableOpacity>
+        </View>
+        <View style={styles.cardlist}>
+          <MovieList />
         </View>
       </View>
     );
@@ -71,5 +75,9 @@ const styles = StyleSheet.create({
     height: 24,
     resizeMode: 'contain',
     width: 24,
+  },
+  cardlist: {
+    paddingTop: 24,
+    alignItems: 'center',
   },
 });
