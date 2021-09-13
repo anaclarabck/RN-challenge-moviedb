@@ -2,19 +2,27 @@
 
 ## Instructions to run
 
-1. Clone the repository: `git clone git@github.com:anaclarabck/RN-challenge-moviedb.git`.
+1. Clone the repository:
+`git clone git@github.com:anaclarabck/RN-challenge-moviedb.git`.
 
-2. Enter the repository folder you just cloned: `cd RN-challenge-moviedb`
+2. Enter the repository folder you just cloned:
+`cd RN-challenge-moviedb`
 
-3. Change to the branch `git checkout developing-anaclarabck-2`
+3. Change to the branch developing-anaclarabck-2:
+`git checkout developing-anaclarabck-2`
 
-4. Enter the folder ChallengeMovie `cd ChallengeMovie`
+4. Enter the folder ChallengeMovie:
+`cd ChallengeMovie`
 
-5. Install the dependencies: `npm install`
+5. Install the dependencies:
+`npm install`
 
-6. Start the Metro: `npm react-native start`
+6. Start the Metro:
+`npm react-native start`
 
-7. Open a new terminal inside the ChallengeMovie folder and start the aplication: `npm react-native run-android`
+7. Open a new terminal inside the ChallengeMovie folder and start the aplication:
+`npm react-native run-android` (Android)
+`npx react-native run-ios` (iOS)
 
 
 ## Description
