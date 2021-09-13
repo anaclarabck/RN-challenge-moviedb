@@ -28,39 +28,41 @@ export const MovieCard = ({element}) => {
     .map(el => findGenre(el).name)
     .filter((_genre, index) => index < 2);
 
-  return item && genres.length > 0 && topMovie ? (
-    <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() =>
-          history.push({
-            pathname: `/details/${id}`,
-            state: {id, genres: genreNames.join(' / '), releaseYear},
-          })
-        }>
-        <View style={id === topMovie ? styles.topMovie : styles.card}>
-          <Image
-            style={styles.image}
-            key={id}
-            source={{uri: `https://image.tmdb.org/t/p/w500${poster_path}`}}
-          />
-          <View style={styles.content}>
-            <View>
-              {id === topMovie && goldMedal()}
-              <Text style={styles.title}>{title}</Text>
-              <Text style={styles.paragraph}>{genreNames.join(' / ')}</Text>
-              <Text style={styles.paragraph}>{releaseYear}</Text>
+  return (
+    item &&
+    genres.length > 0 &&
+    topMovie && (
+      <View style={styles.container}>
+        <TouchableOpacity
+          onPress={() =>
+            history.push({
+              pathname: `/details/${id}`,
+              state: {id, genres: genreNames.join(' / '), releaseYear},
+            })
+          }>
+          <View style={id === topMovie ? styles.topMovie : styles.card}>
+            <Image
+              style={styles.image}
+              key={id}
+              source={{uri: `https://image.tmdb.org/t/p/w500${poster_path}`}}
+            />
+            <View style={styles.content}>
+              <View>
+                {id === topMovie && goldMedal()}
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.paragraph}>{genreNames.join(' / ')}</Text>
+                <Text style={styles.paragraph}>{releaseYear}</Text>
+              </View>
+              {id === topMovie ? (
+                <StarRating rating={vote_average} isBlue={true} />
+              ) : (
+                <StarRating rating={vote_average} />
+              )}
             </View>
-            {id === topMovie ? (
-              <StarRating rating={vote_average} isBlue={true} />
-            ) : (
-              <StarRating rating={vote_average} />
-            )}
           </View>
-        </View>
-      </TouchableOpacity>
-    </View>
-  ) : (
-    <Text>Error</Text>
+        </TouchableOpacity>
+      </View>
+    )
   );
 };
 
