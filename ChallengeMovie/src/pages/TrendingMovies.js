@@ -6,6 +6,7 @@ import {Loading} from '../components/Loading';
 import {MovieList} from '../components/MovieList';
 import {SearchBar} from '../components/SearchBar';
 import {Footer} from '../components/Footer';
+import {Splash} from '../components/Splash';
 
 export const TrendingMovies = () => {
   const [showingSearch, setShowingSearch] = useState(false);
@@ -28,7 +29,7 @@ export const TrendingMovies = () => {
   }, []);
 
   if (genres.length === 0 || filteredMovies.length === 0) {
-    return <Text>Splash</Text>;
+    return <Splash />;
   } else {
     return loading ? (
       <Loading />
