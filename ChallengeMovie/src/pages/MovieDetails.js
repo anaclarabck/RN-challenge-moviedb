@@ -45,14 +45,16 @@ export const MovieDetails = ({location}) => {
 
   useEffect(() => {
     const getMovieDetails = async () => {
-      const response = await movieDetailsApi(id);
+      const response = await movieDetailsApi(id); // movieDetailsApi: fetch movie details of Api, to get information we don't have in the trending movies Api.
       await setMovie(response);
-      await dispatch(filterMovies(id));
+      await dispatch(filterMovies(id)); // filterMovies: it filters trending movies to render all of them, except the current opened.
       setLoading(false);
     };
     getMovieDetails();
   }, [id]);
 
+  // useLayoutEffect: it changes the loading state before the useEffect, making the user see the Loading page instead of the rendering.
+  // (it makes sense when the user press at another card inside of the MovieDetails page)
   useLayoutEffect(() => {
     return () => {
       setLoading(true);
