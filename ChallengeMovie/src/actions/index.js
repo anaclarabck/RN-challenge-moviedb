@@ -6,7 +6,9 @@ export const REQUEST_API_ERROR = 'REQUEST_API_ERROR';
 export const REQUEST_API_GENRE_SUCCESS = 'REQUEST_API_GENRE_SUCCESS';
 export const REQUEST_TOP_MOVIE = 'REQUEST_TOP_MOVIE';
 export const SET_FILTERED_MOVIES = 'SET_FILTERED_MOVIES';
+export const FILTER_MOVIES = 'FILTER_MOVIES';
 
+export const filterMovies = payload => ({type: FILTER_MOVIES, payload});
 export const setFilteredMovies = payload => ({
   type: SET_FILTERED_MOVIES,
   payload,

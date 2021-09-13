@@ -5,6 +5,7 @@ import {
   REQUEST_TOP_MOVIE,
   REQUEST_API_ERROR,
   SET_FILTERED_MOVIES,
+  FILTER_MOVIES,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -30,6 +31,11 @@ function movies(state = INITIAL_STATE, action) {
       return {...state, filteredMovies: payload, isLoading: false};
     case REQUEST_TOP_MOVIE:
       return {...state, topMovie: payload};
+    case FILTER_MOVIES:
+      return {
+        ...state,
+        filteredMovies: state.movies.filter(el => el.id !== payload),
+      };
     default:
       return state;
   }
