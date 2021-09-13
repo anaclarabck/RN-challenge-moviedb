@@ -6,15 +6,16 @@ import {
   ImageBackground,
   TouchableOpacity,
   Image,
+  FlatList,
 } from 'react-native';
 import {useHistory} from 'react-router-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useDispatch, useSelector} from 'react-redux';
 import {movieDetailsApi} from '../services/movieDetailsApi';
 import {StarRating} from '../components/StarRating';
-import {MovieList} from '../components/MovieList';
 import {Loading} from '../components/Loading';
 import {filterMovies} from '../actions';
+import {MovieCard} from '../components/MovieCard';
 
 const TopMovieTitle = () => {
   return (
@@ -26,6 +27,10 @@ const TopMovieTitle = () => {
       />
     </View>
   );
+};
+
+const flatListItemSeparator = () => {
+  return <View style={styles.separator} />;
 };
 
 export const MovieDetails = ({location}) => {
@@ -45,21 +50,44 @@ export const MovieDetails = ({location}) => {
 
   useEffect(() => {
     const getMovieDetails = async () => {
-      const response = await movieDetailsApi(id); // movieDetailsApi: fetch movie details of Api, to get information we don't have in the trending movies Api.
+      const response = await movieDetailsApi(id); // movieDetailsApi: fetch movie details of Api, to get information we don't have in the trending movies Api
       await setMovie(response);
-      await dispatch(filterMovies(id)); // filterMovies: it filters trending movies to render all of them, except the current opened.
+      await dispatch(filterMovies(id)); // filterMovies: it filters trending movies to render all of them except the current opened
       setLoading(false);
     };
     getMovieDetails();
   }, [id]);
 
-  // useLayoutEffect: it changes the loading state before the useEffect, making the user see the Loading page instead of the rendering.
+  // useLayoutEffect: it changes the loading state before the useEffect, making the user see the Loading page instead of the rendering
   // (it makes sense when the user press at another card inside of the MovieDetails page)
   useLayoutEffect(() => {
     return () => {
       setLoading(true);
     };
   }, [id]);
+
+  const Details = () => {
+    return (
+      <>
+        <TouchableOpacity
+          style={styles.touchable}
+          onPress={() => history.push('/')}>
+          <Image
+            style={styles.icon}
+            source={require('../assets/backWhite.png')}
+          />
+        </TouchableOpacity>
+        {id === topMovie && <TopMovieTitle />}
+        <View style={styles.details}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.subtitle}>{subTitle}</Text>
+          <Text style={styles.overview}>{overview}</Text>
+          <StarRating rating={vote_average} />
+        </View>
+        <Text style={styles.trending}>Also trending</Text>
+      </>
+    );
+  };
 
   return loading ? (
     <Loading />
@@ -75,25 +103,17 @@ export const MovieDetails = ({location}) => {
             'rgba(9, 10, 23, 1)',
           ]}
           style={styles.lineargradient}>
-          <TouchableOpacity
-            style={styles.touchable}
-            onPress={() => history.push('/')}>
-            <Image
-              style={styles.icon}
-              source={require('../assets/backWhite.png')}
-            />
-          </TouchableOpacity>
-          {id === topMovie && <TopMovieTitle />}
-          <View style={styles.details}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.subtitle}>{subTitle}</Text>
-            <Text style={styles.overview}>{overview}</Text>
-            <StarRating rating={vote_average} />
-          </View>
-          <Text style={styles.trending}>Also trending</Text>
           {filteredMovies.length > 0 && genresState.length > 0 && (
             <View style={styles.movielist}>
-              <MovieList />
+              <FlatList
+                nestedScrollEnabled
+                data={filteredMovies}
+                ListHeaderComponent={<Details />}
+                renderItem={item => <MovieCard element={item} />}
+                ItemSeparatorComponent={flatListItemSeparator}
+                keyExtractor={(item, index) => index.toString()}
+                initialNumToRender={7}
+              />
             </View>
           )}
         </LinearGradient>
@@ -109,7 +129,6 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     width: '100%',
-    height: '100%',
   },
   touchable: {
     position: 'absolute',
@@ -178,5 +197,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
+  },
+  separator: {
+    height: 16,
+    width: '100%',
   },
 });
