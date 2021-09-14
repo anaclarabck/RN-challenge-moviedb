@@ -10,7 +10,6 @@ const flatListItemSeparator = () => {
 export const MovieList = () => {
   const genres = useSelector(state => state.genres.genres);
   const filteredMovies = useSelector(state => state.movies.filteredMovies);
-  const topMovie = useSelector(state => state.movies.topMovie);
   const moviesFound = useSelector(state => state.movies.moviesFound);
   const errorStatusTrending = useSelector(
     state => state.movies.errorStatusTrending,
@@ -30,14 +29,15 @@ export const MovieList = () => {
 
   if (!moviesFound) {
     return (
+      // when there isn't any movie in the query
       <Text style={styles.text}>Your search did not find any movie :(</Text>
     );
   } else if (error) {
+    // for status response 401 or 404, and for errors in fetching
     return <Text style={styles.text}>Bad request, try again later :(</Text>;
   }
   return (
     filteredMovies.length > 0 &&
-    topMovie &&
     genres.length > 0 && (
       <View style={styles.container}>
         <FlatList

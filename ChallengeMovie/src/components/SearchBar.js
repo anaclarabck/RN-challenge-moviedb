@@ -9,7 +9,7 @@ export const SearchBar = () => {
   const [query, setQuery] = useState('');
   const trendingMovies = useSelector(state => state.movies.trendingMovies);
 
-  // the search happens when the value is changed. When the input is empty, set MovieList with trendingMovies
+  // the search happens when the query is changed. When the input is empty, it sets MovieList with trendingMovies
   useEffect(() => {
     const find = async () => {
       if (query) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Image, View, Text} from 'react-native';
 
-export const StarRating = ({rating, isBlue}) => {
+export const StarRating = ({rating, isBlue = false}) => {
   const ratingRounded = Math.round(rating / 2); // rating rounded 0 to 5
   let stars = [];
   for (let index = 1; index <= 5; index += 1) {

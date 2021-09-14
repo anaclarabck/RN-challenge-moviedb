@@ -14,6 +14,7 @@ export const TrendingMovies = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const splashScreen = useSelector(state => state.movies.splashScreen);
+  // splashScreen is automatically setted to false when fetchTrendingMovies ends
 
   useEffect(() => {
     const fetchMoviesAndGenres = async () => {
