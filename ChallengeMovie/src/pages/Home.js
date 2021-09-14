@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#FFFFFF',
-    // fontFamily: 'Inter',
     fontSize: 32,
     top: '44%',
   },

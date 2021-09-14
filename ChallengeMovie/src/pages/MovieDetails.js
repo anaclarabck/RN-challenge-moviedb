@@ -14,7 +14,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {movieDetailsApi} from '../services/movieDetailsApi';
 import {StarRating} from '../components/StarRating';
 import {Loading} from '../components/Loading';
-import {filterMovies} from '../actions';
+import {removeIdFilteredMovies} from '../actions/moviesActions';
 import {MovieCard} from '../components/MovieCard';
 
 const TopMovieTitle = () => {
@@ -41,7 +41,7 @@ export const MovieDetails = ({location}) => {
   const dispatch = useDispatch();
   const filteredMovies = useSelector(state => state.movies.filteredMovies);
   const topMovie = useSelector(state => state.movies.topMovie);
-  const genresState = useSelector(state => state.movies.genres);
+  const genresState = useSelector(state => state.genres.genres);
   const [movie, setMovie] = useState('');
   const [loading, setLoading] = useState(true);
   const {poster_path, title, overview, runtime, vote_average} = movie;
@@ -52,7 +52,7 @@ export const MovieDetails = ({location}) => {
     const getMovieDetails = async () => {
       const response = await movieDetailsApi(id); // movieDetailsApi: fetch movie details of Api, to get information we don't have in the trending movies Api
       await setMovie(response);
-      await dispatch(filterMovies(id)); // filterMovies: it filters trending movies to render all of them except the current opened
+      await dispatch(removeIdFilteredMovies(id)); // removeIdFilteredMovies: it filters trending movies to render all of them except the current opened
       setLoading(false);
     };
     getMovieDetails();
@@ -148,7 +148,6 @@ const styles = StyleSheet.create({
   },
   toptext: {
     color: '#CDCED1',
-    // fontFamily: 'Inter',
     fontSize: 14,
   },
   topicon: {
@@ -163,20 +162,17 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   title: {
-    // fontFamily: 'Inter',
     fontWeight: 'bold',
     color: '#FFFFFF',
     fontSize: 32,
     paddingBottom: 5,
   },
   subtitle: {
-    // fontFamily: 'Inter',
     color: '#CDCED1',
     fontSize: 12,
     paddingBottom: 16,
   },
   overview: {
-    // fontFamily: 'Inter',
     color: '#FFFFFF',
     fontSize: 14,
     paddingBottom: 16,
@@ -188,7 +184,6 @@ const styles = StyleSheet.create({
   trending: {
     marginLeft: 24,
     fontWeight: 'bold',
-    // fontFamily: 'Inter',
     color: '#FFFFFF',
     fontSize: 24,
     paddingBottom: 8,

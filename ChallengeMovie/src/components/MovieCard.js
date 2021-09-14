@@ -18,7 +18,7 @@ const goldMedal = () => {
 
 export const MovieCard = ({element}) => {
   const history = useHistory();
-  const genres = useSelector(state => state.movies.genres);
+  const genres = useSelector(state => state.genres.genres);
   const topMovie = useSelector(state => state.movies.topMovie);
   const {item} = element;
   const {title, id, poster_path, release_date, genre_ids, vote_average} = item;

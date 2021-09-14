@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, TextInput} from 'react-native';
 import {StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {searchMovies, setFilteredMovies} from '../actions';
+import {searchMovies, setFilteredMovies} from '../actions/moviesActions';
 
 export const SearchBar = () => {
   const dispatch = useDispatch();
@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 8,
     color: 'black',
-    // fontFamily: 'Inter',
     fontSize: 20,
     width: '88%',
   },

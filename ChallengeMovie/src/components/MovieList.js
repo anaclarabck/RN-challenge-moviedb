@@ -8,15 +8,32 @@ const flatListItemSeparator = () => {
 };
 
 export const MovieList = () => {
-  const genres = useSelector(state => state.movies.genres);
+  const genres = useSelector(state => state.genres.genres);
   const filteredMovies = useSelector(state => state.movies.filteredMovies);
   const topMovie = useSelector(state => state.movies.topMovie);
   const moviesFound = useSelector(state => state.movies.moviesFound);
+  const errorStatusTrending = useSelector(
+    state => state.movies.errorStatusTrending,
+  );
+  const errorStatusSearch = useSelector(
+    state => state.movies.errorStatusSearch,
+  );
+  const errorTrending = useSelector(state => state.movies.errorTrending);
+  const errorStatusGenre = useSelector(state => state.genres.errorStatusGenre);
+  const errorGenre = useSelector(state => state.genres.errorGenre);
+  const error =
+    errorStatusTrending ||
+    errorStatusSearch ||
+    errorStatusGenre ||
+    errorTrending ||
+    errorGenre;
 
   if (!moviesFound) {
     return (
       <Text style={styles.text}>Your search did not find any movie :(</Text>
     );
+  } else if (error) {
+    return <Text style={styles.text}>Bad request, try again later :(</Text>;
   }
   return (
     filteredMovies.length > 0 &&
@@ -46,7 +63,6 @@ const styles = StyleSheet.create({
   text: {
     marginTop: 50,
     color: '#FFFFFF',
-    // fontFamily: 'Inter',
     fontSize: 18,
   },
 });
