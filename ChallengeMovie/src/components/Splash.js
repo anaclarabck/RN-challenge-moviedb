@@ -12,10 +12,10 @@ export const Splash = () => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     alignContent: 'center',
-    height: '100%',
+    alignItems: 'center',
     backgroundColor: '#007CFF',
+    height: '100%',
   },
   image: {
     top: '40%',

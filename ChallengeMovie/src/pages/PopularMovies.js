@@ -20,9 +20,9 @@ export const PopularMovies = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#070818',
-    alignItems: 'center',
     alignContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#070818',
     height: '100%',
     margin: 'auto',
   },

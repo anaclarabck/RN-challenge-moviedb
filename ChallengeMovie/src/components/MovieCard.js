@@ -34,13 +34,15 @@ export const MovieCard = ({element}) => {
     topMovie && (
       <View style={styles.container}>
         <TouchableOpacity
+          accessible={true}
+          accessibilityLabel={`Go to the details page of the movie ${title}`}
           onPress={() =>
             history.push({
               pathname: `/details/${id}`,
               state: {id, genres: genreNames.join(' / '), releaseYear},
             })
           }>
-          <View style={id === topMovie ? styles.topMovie : styles.card}>
+          <View style={id === topMovie ? styles.cardTopMovie : styles.card}>
             <Image
               style={styles.image}
               key={id}
@@ -70,12 +72,18 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#070818',
     height: 168,
-    width: '88%',
-    marginRight: '6%',
     marginLeft: '6%',
+    marginRight: '6%',
+    width: '88%',
   },
   card: {
     backgroundColor: '#1B1C2A',
+    borderRadius: 8,
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+  },
+  cardTopMovie: {
+    backgroundColor: '#007CFF',
     borderRadius: 8,
     flexDirection: 'row',
     flexWrap: 'nowrap',
@@ -88,12 +96,8 @@ const styles = StyleSheet.create({
     width: 118,
   },
   content: {justifyContent: 'space-between', margin: 16, width: '56%'},
-  topMovie: {
-    backgroundColor: '#007CFF',
-    borderRadius: 8,
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-  },
+  title: {color: '#FFFFFF', fontSize: 16, paddingBottom: 4},
+  paragraph: {color: '#CDCED1', fontSize: 12},
   goldMedal: {
     alignContent: 'center',
     alignItems: 'center',
@@ -106,6 +110,4 @@ const styles = StyleSheet.create({
     width: 24,
   },
   textMedal: {color: '#CCE5FF', fontSize: 14, fontWeight: '400'},
-  title: {color: '#FFFFFF', fontSize: 16, paddingBottom: 4},
-  paragraph: {color: '#CDCED1', fontSize: 12},
 });

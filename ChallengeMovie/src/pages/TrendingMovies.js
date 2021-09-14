@@ -35,6 +35,8 @@ export const TrendingMovies = () => {
           <Text style={styles.title}>Top Movies</Text>
           <TouchableOpacity onPress={() => setShowingSearch(!showingSearch)}>
             <Image
+              accessible={true}
+              accessibilityLabel="Button to open and close search bar"
               style={styles.icon}
               source={require('../assets/searchWhite.png')}
             />
@@ -52,24 +54,24 @@ export const TrendingMovies = () => {
 
 const styles = StyleSheet.create({
   container: {
-    textAlign: 'center',
-    margin: 'auto',
     backgroundColor: '#070818',
     height: '100%',
+    margin: 'auto',
+    textAlign: 'center',
   },
   header: {
-    paddingTop: 31,
-    flexDirection: 'row',
-    marginHorizontal: 20,
-    justifyContent: 'space-between',
-    alignItems: 'center',
     alignContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
     flexWrap: 'nowrap',
+    justifyContent: 'space-between',
+    marginHorizontal: 20,
+    paddingTop: 31,
   },
   title: {
+    color: '#FFFFFF',
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#FFFFFF',
   },
   icon: {
     height: 24,
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
     width: 24,
   },
   cardlist: {
-    paddingTop: 24,
     alignItems: 'center',
+    paddingTop: 24,
   },
 });

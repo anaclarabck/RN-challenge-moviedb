@@ -6,25 +6,37 @@ export const Footer = ({page}) => {
   const history = useHistory();
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => history.push('/home')}>
+      <TouchableOpacity
+        onPress={() => history.push('/home')}
+        accessible={true}
+        accessibilityLabel="Home button">
         <Image
           style={page === 'home' ? styles.currentIcon : styles.icon}
           source={require('../assets/homeWhite.png')}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => history.push('/')}>
+      <TouchableOpacity
+        onPress={() => history.push('/')}
+        accessible={true}
+        accessibilityLabel="Trending movies button">
         <Image
           style={page === 'trending' ? styles.currentIcon : styles.icon}
           source={require('../assets/trophyWhite.png')}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => history.push('/trailers')}>
+      <TouchableOpacity
+        onPress={() => history.push('/trailers')}
+        accessible={true}
+        accessibilityLabel="Trailers movies button">
         <Image
           style={page === 'trailers' ? styles.currentIcon : styles.icon}
           source={require('../assets/movieWhite.png')}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => history.push('/popular')}>
+      <TouchableOpacity
+        onPress={() => history.push('/popular')}
+        accessible={true}
+        accessibilityLabel="Popular movies button">
         <Image
           style={page === 'popular' ? styles.currentIcon : styles.icon}
           source={require('../assets/chartWhite.png')}

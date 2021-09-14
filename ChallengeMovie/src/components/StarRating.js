@@ -26,36 +26,36 @@ export const StarRating = ({rating, isBlue}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#252634',
     borderRadius: 4,
-    width: 116,
+    flexDirection: 'row',
     height: 24,
+    justifyContent: 'center',
+    width: 116,
   },
   containerBlue: {
-    flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#1F8CFF',
     borderRadius: 4,
-    width: 116,
+    flexDirection: 'row',
     height: 24,
-  },
-  image: {
-    width: 12,
-    height: 12,
-    marginRight: 4.5,
+    justifyContent: 'center',
+    width: 116,
   },
   text: {
-    marginLeft: 2,
-    fontSize: 12,
     color: '#CDCED1',
+    fontSize: 12,
+    marginLeft: 2,
   },
   textBlue: {
-    marginLeft: 2,
-    fontSize: 12,
     color: '#CCE5FF',
+    fontSize: 12,
+    marginLeft: 2,
+  },
+  image: {
+    height: 12,
+    marginRight: 4.5,
+    width: 12,
   },
 });

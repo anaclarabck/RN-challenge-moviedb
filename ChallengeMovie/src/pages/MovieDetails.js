@@ -70,6 +70,8 @@ export const MovieDetails = ({location}) => {
     return (
       <>
         <TouchableOpacity
+          accessible={true}
+          accessibilityLabel="Back button"
           style={styles.touchable}
           onPress={() => history.push('/')}>
           <Image
@@ -128,23 +130,23 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    width: '100%',
     height: '100%',
     resizeMode: 'cover',
+    width: '100%',
   },
   touchable: {
+    left: 22.5,
     position: 'absolute',
     top: 44.5,
-    left: 22.5,
   },
   icon: {
-    width: 24,
     height: 24,
+    width: 24,
   },
   topmovie: {
+    left: 24,
     position: 'absolute',
     top: 184,
-    left: 24,
   },
   toptext: {
     color: '#CDCED1',
@@ -156,15 +158,15 @@ const styles = StyleSheet.create({
     width: 32,
   },
   details: {
-    marginTop: 208,
+    marginBottom: 10,
     marginLeft: 72,
     marginRight: 24,
-    marginBottom: 10,
+    marginTop: 208,
   },
   title: {
-    fontWeight: 'bold',
     color: '#FFFFFF',
     fontSize: 32,
+    fontWeight: 'bold',
     paddingBottom: 5,
   },
   subtitle: {
@@ -182,18 +184,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   trending: {
-    marginLeft: 24,
-    fontWeight: 'bold',
     color: '#FFFFFF',
     fontSize: 24,
+    fontWeight: 'bold',
+    marginLeft: 24,
     paddingBottom: 8,
   },
   lineargradient: {
-    flex: 1,
-    top: 0,
     bottom: 0,
+    flex: 1,
     left: 0,
     right: 0,
+    top: 0,
   },
   separator: {
     height: 16,

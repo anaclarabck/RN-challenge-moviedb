@@ -48,9 +48,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
     width: '88%',
   },
-  searchButton: {
-    alignItems: 'center',
-    alignSelf: 'center',
-    marginHorizontal: 5,
-  },
 });

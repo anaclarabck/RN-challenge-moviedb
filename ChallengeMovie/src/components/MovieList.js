@@ -56,13 +56,13 @@ const styles = StyleSheet.create({
   container: {
     paddingBottom: 135,
   },
+  text: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    marginTop: 50,
+  },
   separator: {
     height: 16,
     width: '100%',
-  },
-  text: {
-    marginTop: 50,
-    color: '#FFFFFF',
-    fontSize: 18,
   },
 });
