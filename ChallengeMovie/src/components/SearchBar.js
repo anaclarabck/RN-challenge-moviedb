@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 8,
     color: 'black',
-    fontFamily: 'Inter',
+    // fontFamily: 'Inter',
     fontSize: 20,
     width: '88%',
   },

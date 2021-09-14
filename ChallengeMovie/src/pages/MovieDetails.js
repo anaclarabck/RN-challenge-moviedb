@@ -129,6 +129,8 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
   touchable: {
     position: 'absolute',
@@ -146,7 +148,7 @@ const styles = StyleSheet.create({
   },
   toptext: {
     color: '#CDCED1',
-    fontFamily: 'Inter',
+    // fontFamily: 'Inter',
     fontSize: 14,
   },
   topicon: {
@@ -161,20 +163,20 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   title: {
-    fontFamily: 'Inter',
+    // fontFamily: 'Inter',
     fontWeight: 'bold',
     color: '#FFFFFF',
     fontSize: 32,
     paddingBottom: 5,
   },
   subtitle: {
-    fontFamily: 'Inter',
+    // fontFamily: 'Inter',
     color: '#CDCED1',
     fontSize: 12,
     paddingBottom: 16,
   },
   overview: {
-    fontFamily: 'Inter',
+    // fontFamily: 'Inter',
     color: '#FFFFFF',
     fontSize: 14,
     paddingBottom: 16,
@@ -186,7 +188,7 @@ const styles = StyleSheet.create({
   trending: {
     marginLeft: 24,
     fontWeight: 'bold',
-    fontFamily: 'Inter',
+    // fontFamily: 'Inter',
     color: '#FFFFFF',
     fontSize: 24,
     paddingBottom: 8,
