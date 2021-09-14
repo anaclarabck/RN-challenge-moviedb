@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   text: {
     marginTop: 50,
     color: '#FFFFFF',
-    fontFamily: 'Inter',
+    // fontFamily: 'Inter',
     fontSize: 18,
   },
 });
